@@ -6,20 +6,32 @@ import types
 #         [1, 2, None]
 #     ]
 
+import types
+
+
 def flat_generator(list_of_lists):
-    lst = []
-    
-    count = 0
-    while len(lst) <= count:
+    cursor = 0
+    cursor_in = 0
+    #m = list_of_lists[cursor]
+    try:
+        while cursor_in != len(list_of_lists[cursor]):
+            m = list_of_lists[cursor]
+            n = m[cursor_in]
+            yield list_of_lists[cursor][cursor_in]
+            cursor_in += 1
         
-        for i in list_of_lists:
-            for ii in i:
-                lst.append(ii)
-            count += 1
-        yield lst
-    
-# for item in flat_generator(b):
-#     print(item)
+            if cursor_in == len(m):
+                cursor += 1
+                cursor_in = 0
+    except:
+        StopIteration  
+     
+
+# for i in flat_generator(b):
+#     print(i)
+
+
+
 
 def test_2():
 

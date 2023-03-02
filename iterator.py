@@ -1,8 +1,9 @@
-# a = [
-#         ['a', 'b', 'c'],
-#         ['d', 'e', 'f', 'h', False],
-#         [1, 2, None]
-#         ]
+a = [
+        ['a', 'b', 'c'],
+        ['d', 'e', 'f', 'h', False],
+        [1, 2, None]
+        ]
+
 
 class FlatIterator:
 
@@ -11,21 +12,34 @@ class FlatIterator:
 
     def __iter__(self):
         self.cursor = 0
-        self.lst = []
+        self.cursor_in = -1
+        
+
         return self
 
     def __next__(self):
         
-           
-            if self.cursor == len(self.lst):
-                for item in self.list_of_list:
-                    for  ii in item:
-                        self.lst.append(ii)
-                self.cursor  += 1
+        
+        m = self.list_of_list[self.cursor]
+        
+
+        
+        if self.cursor_in != len(m) :  
+
+            n = m[self.cursor_in]
+            self.cursor_in += 1
             
-                #return self.lst   # если закоментировать, то проходит первый тест
-            raise StopIteration    
+        if self.cursor_in == len(m):
+
+            self.cursor += 1                   
+            self.cursor_in = 0
             
+                
+          
+        if self.cursor >= len(self.list_of_list):
+            raise StopIteration  
+            
+        return self.list_of_list[self.cursor][self.cursor_in]
                 
 
 
